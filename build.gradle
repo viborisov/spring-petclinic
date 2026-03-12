@@ -56,6 +56,8 @@ dependencies {
   testImplementation 'org.testcontainers:testcontainers-mysql'
   checkstyle "io.spring.javaformat:spring-javaformat-checkstyle:${springJavaformatCheckstyleVersion}"
   checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
+  implementation 'org.springframework.boot:spring-boot-starter-liquibase'
+  testImplementation 'org.springframework.boot:spring-boot-starter-liquibase-test'
 }
 
 tasks.named('test') {

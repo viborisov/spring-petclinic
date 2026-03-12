@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+	<include file="changes/001-create-owners-schema.xml" relativeToChangelogFile="true"/>
+	<include file="changes/002-create-vets-schema.xml" relativeToChangelogFile="true"/>
+	<include file="changes/003-create-specialties-schema.xml" relativeToChangelogFile="true"/>
+	<include file="changes/004-create-types-schema.xml" relativeToChangelogFile="true"/>
+	<include file="changes/005-create-vet_specialties-schema.xml" relativeToChangelogFile="true"/>
+	<include file="changes/006-create-pets-schema.xml" relativeToChangelogFile="true"/>
+	<include file="changes/007-create-visits-schema.xml" relativeToChangelogFile="true"/>
+
+	<include file="changes/010-add-foreign-keys.xml" relativeToChangelogFile="true"/>
+	<include file="changes/020-add-indexes.xml" relativeToChangelogFile="true"/>
+
+	<include file="changes/100-dev-data-vets.xml" relativeToChangelogFile="true"/>
+	<include file="changes/101-dev-data-specialties.xml" relativeToChangelogFile="true"/>
+	<include file="changes/102-dev-data-types.xml" relativeToChangelogFile="true"/>
+	<include file="changes/103-dev-data-owners.xml" relativeToChangelogFile="true"/>
+	<include file="changes/104-dev-data-pets.xml" relativeToChangelogFile="true"/>
+	<include file="changes/105-dev-data-vet-specialties.xml" relativeToChangelogFile="true"/>
+	<include file="changes/106-dev-data-visits.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
