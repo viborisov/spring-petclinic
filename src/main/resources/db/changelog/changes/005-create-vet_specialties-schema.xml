@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+	<changeSet id="005-create-vet_specialties-schema" author="Viktor">
+		<createTable tableName="vet_specialties">
+			<column name="vet_id" type="INT">
+				<constraints nullable="false"/>
+			</column>
+			<column name="specialty_id" type="INT">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+
+		<addPrimaryKey tableName="vet_specialties"
+					   columnNames="vet_id, specialty_id"
+					   constraintName="pk_vet_specialties"/>
+	</changeSet>
+
+</databaseChangeLog>

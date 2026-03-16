@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+	<changeSet id="103-dev-data-types" author="Viktor" context="dev">
+		<sql>
+			INSERT INTO types VALUES (default, 'cat');
+			INSERT INTO types VALUES (default, 'dog');
+			INSERT INTO types VALUES (default, 'lizard');
+			INSERT INTO types VALUES (default, 'snake');
+			INSERT INTO types VALUES (default, 'bird');
+			INSERT INTO types VALUES (default, 'hamster');
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>

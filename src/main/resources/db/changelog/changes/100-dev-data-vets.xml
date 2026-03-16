@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+	<changeSet id="101-dev-data-vets" author="Viktor" context="dev">
+		<sql>
+			INSERT INTO vets VALUES (default, 'James', 'Carter');
+			INSERT INTO vets VALUES (default, 'Helen', 'Leary');
+			INSERT INTO vets VALUES (default, 'Linda', 'Douglas');
+			INSERT INTO vets VALUES (default, 'Rafael', 'Ortega');
+			INSERT INTO vets VALUES (default, 'Henry', 'Stevens');
+			INSERT INTO vets VALUES (default, 'Sharon', 'Jenkins');
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>

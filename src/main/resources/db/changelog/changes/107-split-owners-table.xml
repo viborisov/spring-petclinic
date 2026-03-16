@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+	<changeSet id="107-split-owners-table" author="Viktor">
+
+		<createTable tableName="owners_basic">
+			<column name="id" type="INT" autoIncrement="true">
+				<constraints primaryKey="true" primaryKeyName="pk_owners_basic" nullable="false"/>
+			</column>
+			<column name="first_name" type="VARCHAR(30)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="last_name" type="VARCHAR(30)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+
+		<createTable tableName="owners_contact">
+			<column name="owner_id" type="INT" autoIncrement="true">
+				<constraints primaryKey="true" primaryKeyName="pk_owners_contact" nullable="false"/>
+			</column>
+			<column name="address" type="VARCHAR(255)"/>
+			<column name="city" type="VARCHAR(80)"/>
+			<column name="telephone" type="VARCHAR(20)"/>
+			<column name="email" type="VARCHAR(255)"/>
+		</createTable>
+
+		<addForeignKeyConstraint baseTableName="owners_contact"
+								 baseColumnNames="owner_id"
+								 constraintName="fk_owners_owners_contact"
+								 referencedTableName="owners_basic"
+								 referencedColumnNames="id"/>
+
+		<dropForeignKeyConstraint baseTableName="pets"
+								  constraintName="fk_pets_owners"/>
+
+
+		<sql>
+			INSERT INTO owners_basic (id, first_name, last_name)
+			SELECT id, first_name, last_name
+			from owners;
+		</sql>
+
+		<sql>
+			INSERT INTO owners_contact (owner_id, address, city, telephone, email)
+			SELECT id, address, city, telephone, NULL
+			from owners;
+		</sql>
+
+		<dropTable tableName="owners"/>
+
+
+		<addForeignKeyConstraint baseTableName="pets"
+								 baseColumnNames="owner_id"
+								 constraintName="fk_pets_owners_basic"
+								 referencedTableName="owners_basic"
+								 referencedColumnNames="id"/>
+
+		<rollback>
+
+			<createTable tableName="owners">
+				<column name="id" type="INT" autoIncrement="true">
+					<constraints primaryKey="true" primaryKeyName="pk_owners" nullable="false"/>
+				</column>
+				<column name="first_name" type="VARCHAR(30)">
+					<constraints nullable="false"/>
+				</column>
+				<column name="last_name" type="VARCHAR(30)">
+					<constraints nullable="false"/>
+				</column>
+				<column name="address" type="VARCHAR(255)">
+					<constraints nullable="false"/>
+				</column>
+				<column name="city" type="VARCHAR(80)">
+					<constraints nullable="false"/>
+				</column>
+				<column name="telephone" type="VARCHAR(20)">
+					<constraints nullable="false"/>
+				</column>
+			</createTable>
+
+			<sql>
+				INSERT INTO owners VALUES (default, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023');
+				INSERT INTO owners VALUES (default, 'Betty', 'Davis', '638 Cardinal Ave.', 'Sun Prairie', '6085551749');
+				INSERT INTO owners VALUES (default, 'Eduardo', 'Rodriquez', '2693 Commerce St.', 'McFarland', '6085558763');
+				INSERT INTO owners VALUES (default, 'Harold', 'Davis', '563 Friendly St.', 'Windsor', '6085553198');
+				INSERT INTO owners VALUES (default, 'Peter', 'McTavish', '2387 S. Fair Way', 'Madison', '6085552765');
+				INSERT INTO owners VALUES (default, 'Jean', 'Coleman', '105 N. Lake St.', 'Monona', '6085552654');
+				INSERT INTO owners VALUES (default, 'Jeff', 'Black', '1450 Oak Blvd.', 'Monona', '6085555387');
+				INSERT INTO owners VALUES (default, 'Maria', 'Escobito', '345 Maple St.', 'Madison', '6085557683');
+				INSERT INTO owners VALUES (default, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435');
+				INSERT INTO owners VALUES (default, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487');
+			</sql>
+
+			<dropForeignKeyConstraint baseTableName="pets"
+									  constraintName="fk_pets_owners_basic"/>
+
+			<addForeignKeyConstraint baseTableName="pets"
+									 baseColumnNames="owner_id"
+									 constraintName="fk_pets_owners"
+									 referencedTableName="owners"
+									 referencedColumnNames="id"/>
+
+			<dropForeignKeyConstraint baseTableName="owners_contact"
+									  constraintName="fk_owners_owners_contact"/>
+
+			<dropTable tableName="owners_basic"/>
+			<dropTable tableName="owners_contact"/>
+
+		</rollback>
+
+	</changeSet>
+
+</databaseChangeLog>
